@@ -48,11 +48,6 @@ How a Grid is Represented
 Basic Grid Elements
 -------------------
 
-.. _grid:
-
-.. figure:: images/grid_schematic_ab.png
-    :figwidth: 80%
-    :align: center
 	
     *Figure 1*: Elements of a model grid. The main grid elements are nodes, links, cells, 
     and faces. 
@@ -108,7 +103,6 @@ Now, create a regular (raster) grid with 10 rows and 40 columns, with a node spa
 *mg* is a grid object. This grid has 400 ( 10*40 ) nodes.  It has 2,330 ( 40*(30-1) + 30*(40-1) ) links.
 
 
-.. _fields:
 
 Adding Data to a Landlab Grid Element using Fields
 --------------------------------------------------
@@ -338,12 +332,6 @@ four-row by five-column grid created by RasterModelGrid. The edges of the grid
 are composed of nodes and links. Only the inner six nodes have cells around
 them; the remaining 14 nodes form the perimeter of the grid.
 
-.. _raster4x5:
-
-.. figure:: images/example_raster_grid.png
-    :figwidth: 80%
-    :align: center
-
     Figure 2: Illustration of a simple four-row by five-column raster grid created with
     :class:`~landlab.grid.raster.RasterModelGrid`. By default, all perimeter
     nodes are tagged as open (fixed value) boundaries, and all interior cells
@@ -361,11 +349,6 @@ perimeter nodes are *open boundary*.
 Boundary nodes are flagged as either *open* or *closed*, and links are tagged as 
 either *active* or *inactive* (:ref:`Figure 3 <raster4x5openclosed>`).
 
-.. _raster4x5openclosed:
-
-.. figure:: images/example_raster_grid_with_closed_boundaries.png
-    :figwidth: 80 %
-    :align: center
 
     Figure 3: Illustration of a simple four-row by five-column raster grid with a
     combination of open and closed boundaries.
