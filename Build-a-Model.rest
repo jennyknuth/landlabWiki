@@ -14,7 +14,7 @@ Typically, a driver file will consist of six distinct sections:
 * **Run** the model, typically by creating a for loop or using a Landlab generator (see below)
 * **Finalize** and handle the data (e.g., plot, export)
 
-Beyond the driver, if you’re using Landlab components, you’ll probably also need a **parameter file**. This file supplies the components with the additional parameter and setup information they need. Landlab parameter files are text files ``.txt``, have fixed format, and for convenience (so you only have to specify the minimum of path information in the file name) should be placed in the same folder as the driver file. Find out more about parameter files [[here|Components#input]]. However, if you’re not using components, there’s little need to create a parameter file; you can just directly other parameters to the grid in the driver.
+Beyond the driver, if you’re using Landlab components, you’ll probably also need a **parameter file**. This file supplies the components with the additional parameter and setup information they need. Landlab parameter files are text files ``.txt``, have fixed format, and for convenience (so you only have to specify the minimum of path information in the file name) should be placed in the same folder as the driver file. Find out more about parameter files [[here|Components #input]]. However, if you’re not using components, there’s little need to create a parameter file; you can just directly other parameters to the grid in the driver.
 
 
 A Brief Introduction to Components
