@@ -6,7 +6,7 @@
 [Landlab](http://landlab.github.io) | 
 [[About |About]] |
 [[Examples |Examples]] |
-[[User Guide | User-Guide] |
+[[User Guide | User-Guide]] |
 [Developer API](http://landlab.readthedocs.org/en/latest/#developer-documentation) |
 [Tutorials](http://landlab.readthedocs.org/en/latest/#tutorials) |
 [[FAQs |FAQs]] |
