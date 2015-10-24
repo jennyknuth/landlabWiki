@@ -8,7 +8,7 @@ A python toolkit for modeling earth surface processes
 [User Guide](http://landlab.readthedocs.org/en/latest/#user-guide) |
 [Developer API](http://landlab.readthedocs.org/en/latest/#developer-documentation) |
 [Tutorials](http://landlab.readthedocs.org/en/latest/#tutorials) |
-[FAQs](http://landlab.readthedocs.org/en/latest/#frequently-asked-questions) |
+[FAQs](http://landlab.readthedocs.org/en/latest/#frequently-asked-questions) 
 
 Landlab is a Python-based modeling environment that allows scientists and students to build numeric landscape models. Designed for disciplines that quantify earth surface dynamics such as geomorphology, hydrology, glaciology, and stratigraphy, it can also be used in related fields.
     
