@@ -5,7 +5,7 @@ By default, the boundary nodes around the perimeter of a grid are all
 open boundaries. For a raster grid, if you want to make one or more sides
 closed boundaries, use the grid method `landlab.grid.Raster.RasterModelGrid.set_closed_boundaries_at_grid_edges <http://landlab.readthedocs.org/en/latest/landlab.grid.html#landlab.grid.RasterModelGrid.set_closed_boundaries_at_grid_edges>`_.
 
-The following code snippet sets the southern boudary nodes to be closed.
+The following code snippet sets the southern boundary nodes to be closed.
 
   >>> import landlab
   >>> grid = landlab.RasterModelGrid(3, 4)
