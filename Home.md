@@ -1,5 +1,5 @@
 
-<img src="http://landlab.readthedocs.org/en/latest/#frequently-asked-questions" width="200px"/>
+<img src="https://raw.githubusercontent.com/landlab/landlab-logo/master/Landlab-logo-pic-color.png" width="200px"/>
 A python toolkit for modeling earth surface processes
 
 [Landlab](http://landlab.github.io)
