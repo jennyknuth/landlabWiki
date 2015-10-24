@@ -3,7 +3,7 @@ Why Python?
 
 Landlab is coded in Python and exploits and includes as dependencies a number of widely used scientific Python packages—in particular, NumPy and SciPy. The decision to code in Python was explicitly made to lower the bar to entry for Landlab; to increase the flexibility and reusability of the code base; and to increase development speed both for the core development team and for future users. The choice of Python also means that developers using Landlab can take advantage of that language’s affinity for rapid development timescales.
 
-Other advantages of this choice include high portability between platforms, open source language, numerous existing scientific libraries that prevent developers having to “reinvent the wheel”, and support for selective optimization of time-critical parts of the code base in Cython (see [[Cython | Python,-NumPy,-Scipy,-Cython#cython]]).
+Other advantages of this choice include high portability between platforms, open source language, numerous existing scientific libraries that prevent developers having to “reinvent the wheel,” and support for selective optimization of time-critical parts of the code base in Cython (see [[Cython | Python,-NumPy,-Scipy,-Cython#cython]]).
 
 Getting to know Python
 ======================
@@ -28,7 +28,7 @@ Python doesn’t use parentheses or brackets to delimit code blocks (functions, 
     
 Lines don’t need to end with the semicolon to suppress output; Python won’t print output unless you explicitly call print.
 
-Finally, but importantly, Python doesn't use the hat (^) as its raise-to-the-power symbol. Instead, it uses a double star (**). Simple, but typically very frustrating for a day or two during transition! There's also the NumPy method, np.square, which if you're using arrays typically outperforms the ** operator.
+Finally, but importantly, Python doesn't use the hat (``^``) as its raise-to-the-power symbol. Instead, it uses a double star (**). Simple, but typically very frustrating for a day or two during transition! There's also the NumPy method, ``np.square``, which if you're using arrays typically outperforms the ``**`` operator.
 
 We have a very short tutorial on Python and NumPy from the point of view of Landab (and the key differences with Matlab) `here <http://nbviewer.ipython.org/github/landlab/drivers/blob/master/notebooks/Python_intro.ipynb>`_.
 
