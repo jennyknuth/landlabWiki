@@ -41,3 +41,71 @@ Some of the Landlab capabilities that work with **ModelGrid** to enable easy num
 This document provides a basic introduction to building applications using
 **ModelGrid**. It covers: (1) how grids are represented, and (2) a set of tutorial examples
 that illustrate how to build models using simple scripts.
+
+How a Grid is Represented
+=========================
+
+Basic Grid Elements
+-------------------
+
+.. _grid:
+
+.. figure:: images/grid_schematic_ab.png
+    :figwidth: 80%
+    :align: center
+	
+    *Figure 1*: Elements of a model grid. The main grid elements are nodes, links, cells, 
+    and faces. 
+    Less commonly used elements include corners, patches, and junctions. In the 
+    spring 2015 version of Landlab, **ModelGrid** can implement raster (a) and 
+    Voronoi-Delaunay (b) grids. Ordered subtypes of Voronoi-Delaunay grids - radial 
+    and hexagonal - are also available.
+    (Note that not all links and atches are shown, and only one representative cell is 
+    shaded.)
+
+:ref:`Figure 1 <grid>` illustrates how **ModelGrid** represents a simulation grid. The
+grid contains a set of *(x,y)* points called *nodes*. In a typical
+finite-difference or finite-volume model, nodes are the locations at which one tracks 
+scalar state variables, such as water depth, land elevation, sea-surface elevation,
+or temperature. 
+
+Each adjacent pair of nodes is connected by a line segment known as
+a *link*. A link has both a position in space, denoted
+by the coordinates of the two bounding nodes, and a direction: a link
+runs from one node (known as its *from-node* or *tail-node*) to another 
+(its *to-node* or *head-node*). 
+
+Every node in the grid interior is associated with a polygon known as a *cell* (illustrated,
+for example, by the shaded square region in :ref:`Figure 1a <grid>`). Each cell is 
+bounded by a set of line segments known as *faces*, which it shares with its neighboring
+cells.
+
+In the simple case of a regular (raster) grid, the cells are square, the nodes
+are the center points of the cells (:ref:`Figure 1a <grid>`), and the links and faces have
+identical length (equal to the node spacing). In a Voronoi-Delaunay grid, the
+cells are Voronoi polygons (also known as Theissen polygons)
+(:ref:`Figure 1b <grid>`). In this case, each cell represents the surface area that
+is closer to its own node than to any other node in the grid. The faces then
+represent locations that are equidistant between two neighboring nodes. Other grid
+configurations are possible as well. The spring 2015 version of Landlab includes
+support for hexagonal and radial grids, which are specialized versions of the 
+Voronoi-Delaunay grid shown in :ref:`Figure 1b <grid>`. Note that the node-link-cell-face
+topology is general enough to represent other types of grid; for example, one could use
+**ModelGrid's** data structures to implement a quad-tree grid, 
+or a Delaunay-Voronoi grid in which cells are triangular elements with
+nodes at their circumcenters.
+
+Creating a grid is easy.  The first step is to import Landlab's 
+:class:`~landlab.grid.raster.RasterModelGrid` class (this 
+assumes you have installed landlab and are working in your favorite Python environment):
+
+>>> from landlab import RasterModelGrid
+
+Now, create a regular (raster) grid with 10 rows and 40 columns, with a node spacing (dx) of 5:
+
+>>> mg = RasterModelGrid(10, 40, 5.)
+
+*mg* is a grid object. This grid has 400 ( 10*40 ) nodes.  It has 2,330 ( 40*(30-1) + 30*(40-1) ) links.
+
+
+.. _fields:
