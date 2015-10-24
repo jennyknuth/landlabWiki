@@ -28,7 +28,7 @@ Python doesn’t use parentheses or brackets to delimit code blocks (functions, 
     
 Lines don’t need to end with the semicolon to suppress output; Python won’t print output unless you explicitly call print.
 
-Finally, but importantly, Python doesn't use the hat (.^) as its raise-to-the-power symbol. Instead, it uses a double star (**). Simple, but typically very frustrating for a day or two during transition! There's also the numpy method, np.square, which if you're using arrays typically outperforms the ** operator.
+Finally, but importantly, Python doesn't use the hat (^) as its raise-to-the-power symbol. Instead, it uses a double star (**). Simple, but typically very frustrating for a day or two during transition! There's also the numpy method, np.square, which if you're using arrays typically outperforms the ** operator.
 
 We have a very short tutorial on Python and numpy from the point of view of Landab (and the key differences with Matlab) `here <http://nbviewer.ipython.org/github/landlab/drivers/blob/master/notebooks/Python_intro.ipynb>`_.
 
