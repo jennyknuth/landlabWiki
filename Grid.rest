@@ -417,18 +417,6 @@ method for more detailed information.
 If you are working with an imported irregularly shaped raster grid, you can close nodes 
 which have some fixed NODATA value in the raster using:
 
-* mg.set_nodata_nodes_to_closed(node_data, nodata_value)
 
-Note that all of these commands will treat the status of node links as slave to the 
-status of the nodes, as indicated in :ref:`Figure 3 <raster4x5openclosed>`. 
-Links will be set to active or inactive according to what you set the node boundary 
-conditions as, when you call each method.
-
-If you are working on an irregular grid, or want to do something more complicated 
-with your raster boundary conditions, you will need to modify the grid.node_status 
-array by hand, using indexes to node IDs. When you’re done, be sure to call 
-:func:`~landlab.grid.base.ModelGrid.update_links_nodes_cells_to_new_BCs` 
-to ensure internal consistency between 
-the boundary conditions of the various grid elements.
 
 
