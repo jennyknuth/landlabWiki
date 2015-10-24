@@ -386,7 +386,6 @@ calculations only on active links, as seen in `this tutorial
 .. _bc_details:
 
 Boundary condition details and methods
-
 Field initialization
 ^^^^^^^^^^^^^^^^^^^^
 
