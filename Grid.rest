@@ -385,3 +385,58 @@ calculations only on active links, as seen in `this tutorial
 
 .. _bc_details:
 
+Boundary condition details and methods
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A call to mg.node_status returns the codes representing the boundary condition
+of each node in the grid. There are 5 possible types:
+
+* CORE (Type 0)
+* OPEN FIXED VALUE (Type 1)
+* OPEN FIXED GRADIENT (Type 2)
+* OPEN LOOPED (Type 3)
+* CLOSED (Type 4)
+
+A number of different methods are available to you to interact with (i.e., set and 
+update) boundary conditions at nodes. Landlab is smart enough to automatically 
+initialize new grids with fixed value boundary conditions at all perimeters and core 
+nodes for all interior nodes, but if you want something else, you’ll need to modify 
+the boundary conditions.
+
+If you are working with a simple landlab raster where all interior nodes are core and 
+all perimeter nodes are boundaries, you will find useful the set of commands:
+
+* mg.set_closed_boundaries_at_grid_edges(bottom, left, top, right)
+* mg.set_fixed_value_boundaries_at_grid_edges(bottom, left, top, right)
+* mg.set_fixed_gradient_boundaries(bottom, left, top, right, gradient_in=nan, gradient_of=’topographic__elevation’)
+* mg.set_looped_boundaries(top_bottom_are_looped, left_right_are_looped)
+
+Where bottom, left, top, right are all booleans. See the relevant docstring for each 
+method for more detailed information.
+
+If you are working with an imported irregularly shaped raster grid, you can close nodes 
+which have some fixed NODATA value in the raster using:
+
+* mg.set_nodata_nodes_to_closed(node_data, nodata_value)
+
+Note that all of these commands will treat the status of node links as slave to the 
+status of the nodes, as indicated in :ref:`Figure 3 <raster4x5openclosed>`. 
+Links will be set to active or inactive according to what you set the node boundary 
+conditions as, when you call each method.
+
+If you are working on an irregular grid, or want to do something more complicated 
+with your raster boundary conditions, you will need to modify the grid.node_status 
+array by hand, using indexes to node IDs. When you’re done, be sure to call 
+:func:`~landlab.grid.base.ModelGrid.update_links_nodes_cells_to_new_BCs` 
+to ensure internal consistency between 
+the boundary conditions of the various grid elements.
+
+Note that while setting Landlab boundary conditions on the grid is straightforward, it 
+is up to the individual developer of each Landlab component to ensure it is compatible 
+with these boundary condition schemes! Almost all existing components work fine with 
+core, closed, and fixed_value conditions, but some may struggle with fixed_gradient, 
+and most will struggle with looped. If you’re working with the component library, take 
+a moment to check your components can understand your implemented boundary conditions! 
+See the :ref:`Component Developer’s Guide <dev_components>` for more information.
+
+
