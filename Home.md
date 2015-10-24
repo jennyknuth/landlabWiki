@@ -3,7 +3,7 @@
 A python toolkit for modeling earth surface processes
 
 [Landlab](http://landlab.github.io) | 
-[About](http://landlab.readthedocs.org/en/latest/what_is_landlab.html) |
+[About](http://landlab.readthedocs.org/en/latest/what_is_landlab.html) [[About |About]]|
 [Examples](https://github.com/landlab/landlab/wiki/Examples) |
 [User Guide](http://landlab.readthedocs.org/en/latest/#user-guide) |
 [Developer API](http://landlab.readthedocs.org/en/latest/#developer-documentation) |
