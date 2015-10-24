@@ -77,4 +77,4 @@ The way to do this is:
 Why are there no other FAQs besides these few?
 ----------------------------------------------
 
-Because the FAQ section hasn't been finished yet. Please feel free to add your own questions to this wiki.
+Please feel free to add your own questions to this wiki.
