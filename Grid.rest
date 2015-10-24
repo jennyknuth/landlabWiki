@@ -386,7 +386,6 @@ calculations only on active links, as seen in `this tutorial
 .. _bc_details:
 
 Boundary condition details and methods
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A call to mg.node_status returns the codes representing the boundary condition
 of each node in the grid. There are 5 possible types:
@@ -396,3 +395,234 @@ of each node in the grid. There are 5 possible types:
 * OPEN FIXED GRADIENT (Type 2)
 * OPEN LOOPED (Type 3)
 * CLOSED (Type 4)
+
+A number of different methods are available to you to interact with (i.e., set and 
+update) boundary conditions at nodes. Landlab is smart enough to automatically 
+initialize new grids with fixed value boundary conditions at all perimeters and core 
+nodes for all interior nodes, but if you want something else, you’ll need to modify 
+the boundary conditions.
+
+If you are working with a simple landlab raster where all interior nodes are core and 
+all perimeter nodes are boundaries, you will find useful the set of commands:
+
+* mg.set_closed_boundaries_at_grid_edges(bottom, left, top, right)
+* mg.set_fixed_value_boundaries_at_grid_edges(bottom, left, top, right)
+* mg.set_fixed_gradient_boundaries(bottom, left, top, right, gradient_in=nan, gradient_of=’topographic__elevation’)
+* mg.set_looped_boundaries(top_bottom_are_looped, left_right_are_looped)
+
+Where bottom, left, top, right are all booleans. See the relevant docstring for each 
+method for more detailed information.
+
+If you are working with an imported irregularly shaped raster grid, you can close nodes 
+which have some fixed NODATA value in the raster using:
+
+* mg.set_nodata_nodes_to_closed(node_data, nodata_value)
+
+Note that all of these commands will treat the status of node links as slave to the 
+status of the nodes, as indicated in :ref:`Figure 3 <raster4x5openclosed>`. 
+Links will be set to active or inactive according to what you set the node boundary 
+conditions as, when you call each method.
+
+If you are working on an irregular grid, or want to do something more complicated 
+with your raster boundary conditions, you will need to modify the grid.node_status 
+array by hand, using indexes to node IDs. When you’re done, be sure to call 
+:func:`~landlab.grid.base.ModelGrid.update_links_nodes_cells_to_new_BCs` 
+to ensure internal consistency between 
+the boundary conditions of the various grid elements.
+
+Note that while setting Landlab boundary conditions on the grid is straightforward, it 
+is up to the individual developer of each Landlab component to ensure it is compatible 
+with these boundary condition schemes! Almost all existing components work fine with 
+core, closed, and fixed_value conditions, but some may struggle with fixed_gradient, 
+and most will struggle with looped. If you’re working with the component library, take 
+a moment to check your components can understand your implemented boundary conditions! 
+See the :ref:`Component Developer’s Guide <dev_components>` for more information.
+
+
+Using a Different Grid Type
+===========================
+
+As noted earlier, Landlab provides several different types of grid. Available grids 
+(as of this writing) are listed in the table below. Grids are designed using Python 
+classes, with more specialized grids inheriting properties and behavior from more 
+general types. The class heirarchy is given in the second column, **Inherits from**. 
+
+=======================   =======================   ==================   ================
+Grid type                 Inherits from             Node arrangement     Cell geometry
+=======================   =======================   ==================   ================
+``RasterModelGrid``       ``ModelGrid``             raster               squares
+``VoronoiDelaunayGrid``   ``ModelGrid``             Delaunay triangles   Voronoi polygons
+``HexModelGrid``          ``VoronoiDelaunayGrid``   triagonal            hexagons
+``RadialModelGrid``       ``VoronoiDelaunayGrid``   concentric           Voronoi polygons
+=======================   =======================   ==================   ================
+
+:class:`~landlab.grid.raster.RasterModelGrid` gives a regular (square) grid, initialized
+with *number_of_node_rows*, *number_of_node_columns*, and a *spacing*.
+In a :class:`~landlab.grid.voronoi.VoronoiDelaunayGrid`, a set of node coordinates 
+is given as an initial condition. 
+Landlab then forms a Delaunay triangulation, so that the links between nodes are the 
+edges of the triangles, and the cells are Voronoi polygons. 
+A :class:`~landlab.grid.hex.HexModelGrid` is a 
+special type of VoronoiDelaunayGrid in which the Voronoi cells happen to be 
+regular hexagons.
+In a :class:`~landlab.grid.radial.RadialModelGrid`, nodes are created in concentric 
+circles and then connected to 
+form a Delaunay triangulation (again with Voronoi polygons as cells). 
+.. The next example illustrates the use of a RadialModelGrid.
+
+
+Importing a DEM
+===============
+
+Landlab offers the methods :func:`~landlab.io.esri_ascii.read_esri_ascii` and 
+:func:`~landlab.io.netcdf.read_netcdf` to allow ingestion of
+existing digital elevation models as raster grids.
+
+**read_esri_ascii** allows import of an ARCmap formatted ascii file (.asc or .txt) 
+as a grid.
+It returns a tuple, containing the grid and the elevations in Landlab ID order.
+Use the *name* keyword to add the elevation to a field in the imported grid.
+
+>>> from landlab.io import read_esri_ascii
+>>> (mg, z) = read_esri_ascii('myARCoutput.txt', name='topographic__elevation')
+>>> mg.at_node.keys()
+['topographic__elevation']
+
+**read_netcdf** allows import of the open source netCDF format for DEMs. Fields will
+automatically be created according to the names of variables found in the file.
+Returns a :class:`~landlab.grid.raster.RasterModelGrid`.
+
+>>> from landlab.io.netcdf import read_netcdf
+>>> mg = read_netcdf('mynetcdf.nc')
+
+
+After import, you can use :func:`~landlab.grid.base.ModelGrid.set_nodata_nodes_to_closed` 
+to handle the boundary conditions in your imported DEM.
+
+Equivalent methods for output are also available for both esri 
+(:func:`~landlab.io.esri_ascii.write_esri_ascii`) and netCDF 
+(:func:`~landlab.io.netcdf.write_netcdf`) formats.
+
+
+.. _Plotting:
+
+Plotting and Visualization
+==========================
+
+Visualising a Grid
+------------------
+
+Landlab offers a set of matplotlib-based plotting routines for your data. These exist 
+in the landlab.plot library. You’ll also need to import some basic plotting functions 
+from pylab (or matplotlib) to let you control your plotting output: at a minimum **show** 
+and **figure**. The most useful function is called 
+:func:`~landlab.plot.imshow.imshow_node_grid`, and is imported 
+and used as follows:
+
+>>> from landlab.plot.imshow import imshow_node_grid
+>>> from pylab import show, figure
+>>> mg = RasterModelGrid(50,50, 1.) #make a grid to plot
+>>> z = mg.node_x *0.1 #make an arbitrary sloping surface
+>>> #create the data as a field
+>>> mg.add_field(‘node’, ‘topographic_elevation’, z, units=’meters’, 
+                 copy=True)
+>>> figure(‘Elevations from the field’) #new fig, with a name
+>>> imshow_node_grid(mg, ‘topographic_elevation’)
+>>> figure(‘You can also use values directly, not fields’)
+>>> #...but if you, do you’ll lose the units, figure naming capabilities, etc
+>>> imshow_node_grid(mg, z)
+>>> show()
+
+Note that :func:`~landlab.plot.imshow.imshow_node_grid` 
+is clever enough to examine the grid object you pass it, 
+work out whether the grid is irregular or regular, and plot the data appropriately.
+
+By default, Landlab uses a Python colormap called *‘pink’*. This was a deliberate choice 
+to improve Landlab’s user-friendliness to the colorblind in the science community. 
+Nonetheless, you can easily override this colorscheme using the keyword *cmap* as an 
+argument to imshow_node_grid. Other useful built in colorschemes are *‘bone’* (black 
+to white), *'jet'*, (blue to red, through green), *‘Blues’* (white to blue), and 
+*‘terrain’* (blue-green-brown-white)  (note these names are case sensitive). 
+See `the matplotlib reference guide 
+<http://matplotlib.org/examples/color/colormaps_reference.html>`_ for more options. 
+Note that imshow_node_grid takes many of the same keyword arguments as, and is designed
+to resemble, the standard matplotlib function `imshow 
+<http://matplotlib.org/users/image_tutorial.html>`_. See also the method help for more
+details.
+In particular, note you can set the maximum and minimum you want for your colorbar using
+the keywords *vmin* and *vmax*, much as in similar functions in the matplotlib library.
+
+
+Visualising transects through your data
+---------------------------------------
+
+If you are working with a regular grid, it is trivial to plot horizontal and vertical 
+sections through your data. The grid provides the method 
+:func:`~landlab.grid.raster.RasterModelGrid.node_vector_to_raster`, which 
+will turn a Landlab 1D node data array into a two dimensional rows*columns numpy array, 
+which you can then take slices of. e.g., we can do this:
+
+>>> from pylab import plot, show
+>>> mg = RasterModelGrid(10,10, 1.)
+>>> z = mg.node_x *0.1
+>>> my_section = mg.node_vector_to_raster(z, flip_vertically=True)[:,5]
+>>> my_ycoords = mg.node_vector_to_raster(mg.node_y, flip_vertically=True)[:,5]
+>>> plot(my_ycoords, my_section)
+>>> show()
+
+
+Visualizing river profiles
+--------------------------
+
+Landlab provides a (still somewhat experimental) basic stream profiler. It is also found 
+in the :mod:`~landlab.plot.channel_profile` library. The key function is called 
+:func:`~landlab.plot.channel_profile.analyze_channel_network_and_plot`, 
+though you can also call the functions in :mod:`~landlab.plot.channel_profile` 
+individually. It was designed to interface with the flow_routing 
+Landlab component, and assumes you already have most of the fields that that component 
+produces in your grid (i.e., *'topographic_elevation'*, *'drainage_area'*, 
+*'flow_receiver'*, and *'links_to_flow_receiver'*). It can also take three additional 
+arguments:
+
+* *number_of_channels* - an integer giving how many stream channels you want to extract 
+  from the grid, default 1;
+* *starting_nodes* - the ID, or list or array of IDs (per number_of_channels), of the 
+  node at which the outlet of the channel you want to profile is at. Default is None, 
+  which tells the profiler to start from the number_of_channels nodes with the highest 
+  drainage areas that are boundary nodes;
+* *threshold* - the threshold drainage area (in drainage area units, not pixels) to stop 
+  tracing the channels upstream. Defaults to None, which tells the profiler to apply a 
+  threshold of twice the smallest cell area in the grid.
+
+The profiler will add a plot of elevation vs distance upstream to the currently active 
+figure each time it is called. It also returns a 2-item tuple containing 
+1. a number_of_channels-long list of **arrays of profile IDs in each stream**, arranged in 
+upstream order, and 2. a number_of_channels-long list of **arrays of distances of those 
+nodes upstream**. In this way, you can extract drainage areas or other pertinent surface 
+metrics to use with a call to pylab.plot to get, e.g., slope-area, elevation-drainage 
+area, etc plots.
+
+See the `component tutorial 
+<http://nbviewer.ipython.org/github/landlab/drivers/blob/master/notebooks/component_tutorial.ipynb>`_ 
+for an example of the profiler in use.  
+(Tutorials available as downloadable and executable file  from  
+https://github.com/landlab/drivers/archive/master.zip.)
+
+Please let the development team know if you would like a better profiler, or better yet, 
+have coded one up for Landlab yourself and would like to contribute it!
+
+Making Movies
+-------------
+
+Landlab does have an experimental movie making component. However, it has come to the 
+developers’ attention that the matplotlib functions it relies on in turn demand that 
+your machine already has installed one of a small set of highly temperamental open 
+source video codecs. It is quite likely using the component in its current form is 
+more trouble than it’s worth; however, the brave can take a look at the library 
+:mod:`~landlab.plot.video_out`. We intend to improve video out in future Landlab releases.
+
+For now, we advocate the approach of creating an animation by saving separately 
+individual plots from, e.g., **plot()** or :func:`~landlab.plot.imshow.imshow_node_grid`, 
+then stitching them together 
+into, e.g., a gif using external software. Note it’s possible to do this directly from 
+Preview on a Mac.
