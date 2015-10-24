@@ -22,7 +22,7 @@ See also:
 Can I import Landlab output into ParaView or VisIt?
 ---------------------------------------------------
 
-See `how_to_export_to_netcdf https://github.com/landlab/landlab/wiki/FAQ#how-do-i-get-netcdf-output`_ below.
+See `How do I get netCDF output? <https://github.com/landlab/landlab/wiki/FAQ#how-do-i-get-netcdf-output>`_ below.
 
 How do I get netCDF output?
 ---------------------------
