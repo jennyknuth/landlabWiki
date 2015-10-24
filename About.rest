@@ -15,7 +15,8 @@ taking advantage of codes that have already been written.
 Acknowledgements
 ----------------
 
-Citing Landlab::
+Citing Landlab 
+::
 
   @MISC{Landlab2013,
     author = "Tucker, G. and Gasparini, N. and Istanbulluoglu, E. and Hobley, D. and Nudurupati, S. and Adams, J. and Hutton, E.",
