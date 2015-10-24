@@ -1,5 +1,3 @@
-.. _model_grid_description:
-
 Introduction to Landlab's Gridding Library
 ===========================================
 
