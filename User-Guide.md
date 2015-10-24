@@ -1,4 +1,4 @@
-[[Nuts and Bolts of Coding in Landlab|Python Numpy Scipy Cython]]
+[[Python, NumPy, SciPy, and Cython |Python,-NumPy,-SciPy,-Cython]]
 
 [[Landlab's Gridding Library|Grid]]
 
