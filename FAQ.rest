@@ -29,7 +29,7 @@ How do I get netCDF output?
 
 At present, Landlab can write output to a netCDF file if you are using a raster grid
 (support for unstructured grids is coming later). A tutorial example is provided in
-:ref:`landlab_tools_and_tricks`.  To create netCDF output, use the function
+`Discovering Landlab's Tools and Tricks <http://landlab.readthedocs.org/en/latest/tutorial.html#landlab-tools-and-tricks>`_.  To create netCDF output, use the function
 :func:`~landlab.io.netcdf.write_netcdf`. This function will write to file
   1. the grid geometry, and
   2. any data arrays that are linked to the grid
