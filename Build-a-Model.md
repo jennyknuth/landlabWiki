@@ -14,7 +14,7 @@ Typically, a driver file will consist of six distinct sections:
 * **Run** the model, typically by creating a for loop or using a Landlab generator (see below)
 * **Finalize** and handle the data (e.g., plot, export)
 
-Beyond the driver, if you’re using Landlab components, you’ll probably also need a **parameter file**. This file supplies the components with the additional parameter and setup information they need. Landlab parameter files are text files (.txt), have fixed format, and for convenience (so you only have to specify the minimum of path information in the file name) should be placed in the same folder as the driver file. Find out more about parameter files [[here | Components#input]]. However, if you’re not using components, there’s little need to create a parameter file; you can just directly other parameters to the grid in the driver.
+Beyond the driver, if you’re using Landlab components, you’ll probably also need a **parameter file**. This file supplies the components with the additional parameter and setup information they need. Landlab parameter files are text files ``.txt``, have fixed format, and for convenience (so you only have to specify the minimum of path information in the file name) should be placed in the same folder as the driver file. Find out more about parameter files [[here | Components#input]]. However, if you’re not using components, there’s little need to create a parameter file; you can just directly other parameters to the grid in the driver.
 
 
 A Brief Introduction to Components
@@ -51,7 +51,7 @@ And under active development are:
 * Divergent and mixed convergent-divergent flow routers
 * A deltaic simulator
 
-Note that not all components will run under all conditions, but that any limitations should be made clear in the inline documentation associated with that component (access help either through the indices you can find `on this site <http://landlab.readthedocs.org/en/latest/users_guide.html#list-of-landlab-components>`_ or by typing “[component or method]?” in an interactive Python session). In particular, some components may demand you are running on a regular grid. It should probably also be emphasized that most of these components are still under active development within this beta release of Landlab, and may behave in idiosyncratic ways or be subject to sudden changes with little or no warning. In all cases, we’d recommend contacting the original coder of the component to let them know they have external users to think about before setting out on any major research challenges using it!
+Note that not all components will run under all conditions, but that any limitations should be made clear in the inline documentation associated with that component (access help either through the indices you can find `on this site <http://landlab.readthedocs.org/en/latest/users_guide.html#list-of-landlab-components>`_ or by typing ``[component or method]?`` in an interactive Python session). In particular, some components may demand you are running on a regular grid. It should probably also be emphasized that most of these components are still under active development within this beta release of Landlab, and may behave in idiosyncratic ways or be subject to sudden changes with little or no warning. In all cases, we’d recommend contacting the original coder of the component to let them know they have external users to think about before setting out on any major research challenges using it!
 
 
 Implementing a Landlab driver
