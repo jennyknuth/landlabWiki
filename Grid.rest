@@ -405,18 +405,3 @@ the boundary conditions.
 
 If you are working with a simple landlab raster where all interior nodes are core and 
 all perimeter nodes are boundaries, you will find useful the set of commands:
-
-* mg.set_closed_boundaries_at_grid_edges(bottom, left, top, right)
-* mg.set_fixed_value_boundaries_at_grid_edges(bottom, left, top, right)
-* mg.set_fixed_gradient_boundaries(bottom, left, top, right, gradient_in=nan, gradient_of=’topographic__elevation’)
-* mg.set_looped_boundaries(top_bottom_are_looped, left_right_are_looped)
-
-Where bottom, left, top, right are all booleans. See the relevant docstring for each 
-method for more detailed information.
-
-If you are working with an imported irregularly shaped raster grid, you can close nodes 
-which have some fixed NODATA value in the raster using:
-
-
-
-
