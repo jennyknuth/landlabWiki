@@ -15,7 +15,7 @@ The following code snippet sets the southern boundary nodes to be closed.
 
 See also:
 
-  `landlab.grid.raster.RasterModelGrid.set_fixed_value_boundaries_at_grid_edges <http://landlab.readthedocs.org/en/latest/landlab.grid.html#landlab.grid.set_fixed_value_boundaries_at_grid_edges>`_,
+  `landlab.grid.raster.RasterModelGrid.set_fixed_value_boundaries_at_grid_edges <http://landlab.readthedocs.org/en/latest/manual_index_alt_format.html#landlab.grid.raster.RasterModelGrid.set_fixed_value_boundaries_at_grid_edges>`_,
   `landlab.grid.base.ModelGrid.set_nodata_nodes_to_closed <http://landlab.readthedocs.org/en/latest/landlab.grid.html#landlab.grid.base.ModelGrid.set_nodata_nodes_to_closed>`_
 
 
