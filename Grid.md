@@ -50,6 +50,8 @@ Basic Grid Elements
 
 .. _grid:
 
+![Landlab grid schematic](images/grid_schematic_ab.png)
+
 .. figure:: images/grid_schematic_ab.png
     :figwidth: 80%
     :align: center
