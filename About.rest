@@ -1,12 +1,3 @@
-
-[Landlab](http://landlab.github.io) | 
-[[About |About]] |
-[[Examples |Examples]] |
-[[User Guide | User-Guide]] |
-[Developer API](http://landlab.readthedocs.org/en/latest/#developer-documentation) |
-[[Tutorials| Tutorials ]] |
-[[FAQs |FAQs]] |
-
 The Landlab project creates an environment in which scientists can build a
 numerical landscape model without having to code all of the individual
 components. Landscape models compute flows of mass, such as water, sediment,
