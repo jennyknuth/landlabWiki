@@ -1,0 +1,43 @@
+.. _model_grid_description:
+
+Introduction to Landlab's Gridding Library
+===========================================
+
+When creating a two-dimensional simulation model, often the most time-consuming and
+error-prone task involves writing the code to set up the underlying grid. Irregular
+(or "unstructured") grids are especially tricky to implement. Landlab's **ModelGrid**
+package makes this process much easier, by providing a set of library routines for
+creating and managing a 2D grid, attaching data to the grid, performing common input
+and output operations, and  providing library functions that handle common numerical 
+operations such as calculating a field of gradients for a particular state variable. 
+By taking care of much of the overhead involved in writing grid-management code, 
+**ModelGrid** is designed to help you build 2D models quickly and efficiently, freeing you
+to concentration on the science behind the code.
+
+Some of the things you can do with **ModelGrid** include:
+
+- Create and configure a structured or unstructured grid in a one or a few lines of code
+- Create various data arrays attached to the grid
+- Easily implement staggered-grid finite-difference / finite-volume schemes
+- Calculate gradients in state variables in a single line
+- Calculate net fluxes in/out of grid cells in a single line
+- Set up and run "link-based" cellular automaton models
+- Switch between structured and unstructured grids without needing to change the rest of
+  the code
+- Develop complete, 2D numerical finite-volume or finite-difference models much more
+  quickly and efficiently than would be possible using straight C, Fortran, Matlab, or 
+  Python code
+
+Some of the Landlab capabilities that work with **ModelGrid** to enable easy numerical modeling include:
+
+- Easily read in model parameters from a formatted text file
+- Write grid and data output to netCDF files for import into open-source visualization 
+  packages such as ParaView and VisIt
+- Create grids from ArcGIS-formatted ascii files
+- Create models by coupling together your own and/or pre-built process components 
+- Use models built by others from process components
+
+
+This document provides a basic introduction to building applications using
+**ModelGrid**. It covers: (1) how grids are represented, and (2) a set of tutorial examples
+that illustrate how to build models using simple scripts.
