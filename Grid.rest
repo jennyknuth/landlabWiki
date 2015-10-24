@@ -288,3 +288,33 @@ Now gradients have been calculated at all links that are active, or links on whi
 flow is possible (see boundary conditions below).  
 
 
+Other Grid Elements
+-------------------
+
+The cell vertices are called *corners* (:ref:`Figure 1, solid squares <grid>`).
+Each face is therefore a line segment connecting two corners. The intersection
+of a face and a link (or directed edge) is known as a *junction*
+(:ref:`Figure 1, open diamonds <grid>`). Often, it is useful to calculate scalar
+values (say, ice thickness in a glacier) at nodes, and vector values (say, ice
+velocity) at junctions. This approach is sometimes referred to as a
+staggered-grid scheme. It lends itself naturally to finite-volume methods, in
+which one computes fluxes of mass, momentum, or energy across cell faces, and
+maintains conservation of mass within cells.  (In the spring 2015 version of Lanlab, 
+there are no supporting functions for the use of junctions, but support is imminent.)
+
+Notice that the links also enclose a set of polygons that are offset from the
+cells. These secondary polygons are known as *patches* (:ref:`Figure 1,
+dotted <grid>`). This means that any grid comprises two complementary tesselations: one
+made of cells, and one made of patches. If one of these is a Voronoi
+tessellation, the other is a Delaunay triangulation. For this reason, Delaunay
+triangulations and Voronoi diagrams are said to be dual to one another: for any
+given Delaunay triangulation, there is a unique corresponding Voronoi diagram. 
+With **ModelGrid,** one can
+create a mesh with Voronoi polygons as cells and Delaunay triangles as patches
+(:ref:`Figure 1b <grid>`). Alternatively, with a raster grid, one simply has
+two sets of square elements that are offset by half the grid spacing
+(:ref:`Figure 1a <grid>`). Whatever the form of the tessellation, **ModelGrid** keeps
+track of the geometry and topology of the grid. patches can be useful for processes
+like calculating the mean gradient at a node, incorporating influence from its
+neighbors.
+
