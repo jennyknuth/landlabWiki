@@ -1,9 +1,7 @@
-.. _drive_a_model:
-
 What goes into a Landlab Model?
 ==============================
 
-In the previous section, we showed you most of the core functionality of the Landlab grid. In this section, we introduce you to how to actually use it, to build models and work with the Landlab component library.
+In the [[ previous section | Grid]], we showed you most of the core functionality of the Landlab grid. In this section, we introduce you to how to actually use it, to build models and work with the Landlab component library.
 
 Using Landlab requires that you build a Python script to import, instantiate, and then run your landscape model. We describe such a script as a **driver**.  It’s also possible to do the same set of processes on the fly in an interactive Python environment like iPython.
 
@@ -16,7 +14,7 @@ Typically, a driver file will consist of six distinct sections:
 * **Run** the model, typically by creating a for loop or using a Landlab generator (see below)
 * **Finalize** and handle the data (e.g., plot, export)
 
-Beyond the driver, if you’re using Landlab components, you’ll probably also need a **parameter file**. This file supplies the components with the additional parameter and setup information they need. Landlab parameter files are text files (.txt), have fixed format, and for convenience (so you only have to specify the minimum of path information in the file name) should be placed in the same folder as the driver file. Find out more about parameter files :ref:`here <input_files>`. However, if you’re not using components, there’s little need to create a parameter file; you can just directly other parameters to the grid in the driver.
+Beyond the driver, if you’re using Landlab components, you’ll probably also need a **parameter file**. This file supplies the components with the additional parameter and setup information they need. Landlab parameter files are text files (.txt), have fixed format, and for convenience (so you only have to specify the minimum of path information in the file name) should be placed in the same folder as the driver file. Find out more about parameter files [[here | Components#input]]. However, if you’re not using components, there’s little need to create a parameter file; you can just directly other parameters to the grid in the driver.
 
 
 A Brief Introduction to Components
@@ -28,7 +26,7 @@ A key strength of Landlab is that not only is it designed to make implementing y
 * Interoperable with all other components
 * Implementable in your driver in only one or two lines of code
 
-Note that by no means is using the component library necessary or even always desirable when working with Landlab. However, we hope that their availability and ease of use will dramatically reduce the time investment needed to implement a wide variety of modelling scenarios. In particular, components should make production of models coupling more than one process significantly easier, as existing, off-the-shelf components can be slotted in alongside novel process descriptions.
+Note that by no means is using the component library necessary or even always desirable when working with Landlab. However, we hope that their availability and ease of use will dramatically reduce the time investment needed to implement a wide variety of modeling scenarios. In particular, components should make production of models coupling more than one process significantly easier, as existing, off-the-shelf components can be slotted in alongside novel process descriptions.
 
 At the time of writing, the existing library contains the following components:
 
@@ -36,7 +34,7 @@ At the time of writing, the existing library contains the following components:
 * Transport limited channel incision
 * Linear (hillslope) diffusion
 * Nonlinear hillslope diffusion
-* D8 /Dn (D8 generalized to Voronoi) flow routing
+* D8/Dn (D8 generalized to Voronoi) flow routing
 * Simple and not-so-simple crustal flexure
 * A simple fire simulator
 * A thin-ice glacial approximation
@@ -53,7 +51,7 @@ And under active development are:
 * Divergent and mixed convergent-divergent flow routers
 * A deltaic simulator
 
-Note that not all components will run under all conditions, but that any limitations should be made clear in the inline documentation associated with that component (access help either through the indices you can find `on this site <http://landlab.readthedocs.org/en/latest/users_guide.html#list-of-landlab-components>`_ or by typing “[component or method]?” in an interactive Python session). In particular, some components may demand you are running on a regular grid. It should probably also be emphasised that most of these components are still under active development within this beta release of Landlab, and may behave in idiosyncratic ways or be subject to sudden changes with little or no warning. In all cases, we’d recommend contacting the original coder of the component to let them know they have external users to think about before setting out on any major research challenges using it!
+Note that not all components will run under all conditions, but that any limitations should be made clear in the inline documentation associated with that component (access help either through the indices you can find `on this site <http://landlab.readthedocs.org/en/latest/users_guide.html#list-of-landlab-components>`_ or by typing “[component or method]?” in an interactive Python session). In particular, some components may demand you are running on a regular grid. It should probably also be emphasized that most of these components are still under active development within this beta release of Landlab, and may behave in idiosyncratic ways or be subject to sudden changes with little or no warning. In all cases, we’d recommend contacting the original coder of the component to let them know they have external users to think about before setting out on any major research challenges using it!
 
 
 Implementing a Landlab driver
@@ -64,10 +62,10 @@ As noted above, the process of creating a driver is essentially equivalent wheth
 1. Import the libraries and functions you need
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-Landlab handles a lot like numpy, and like numpy you’ll need to import the various libraries and functions that you’ll want to use. At the very least, we suspect you’ll need from outside Landlab:
+Landlab handles a lot like NumPy, and like NumPy you’ll need to import the various libraries and functions that you’ll want to use. At the very least, we suspect you’ll need from outside Landlab:
 
-* *numpy* itself
-* rudimentary pylab plotting routines: *plot*, *show*, *figure*
+* *NumPy* itself
+* rudimentary Pylab plotting routines: *plot*, *show*, *figure*
 
 Also useful can be:
 
@@ -76,9 +74,9 @@ Also useful can be:
 
 From inside Landlab, you’ll also need:
 
-* A **grid** class. Choose from :class:`~landlab.grid.raster.RasterModelGrid`, :class:`~landlab.grid.voronoi.VoronoiDelaunayGrid`, or some of the more specialized classes
+* A **grid** class. Choose from `landlab.grid.raster.RasterModelGrid <http://landlab.readthedocs.org/en/latest/landlab.grid.html#landlab.grid.raster.RasterModelGrid>`_, `landlab.grid.voronoi.VoronoiDelaunayGrid <http://landlab.readthedocs.org/en/latest/landlab.grid.html#landlab.grid.voronoi.VoronoiDelaunayGrid>`_, or some of the more specialized classes
 * Any **components** you want to run
-* Any Landlab **utilities** you need, like the plotters (:func:`~landlab.plot.imshow.imshow_node_grid`) or **io** functions
+* Any Landlab **utilities** you need, like the plotters (`landlab.plot.imshow.imshow_node_grid <http://landlab.readthedocs.org/en/latest/landlab.grid.html#landlab.plot.imshow.imshow_node_grid>`_) or **io** functions
 
 A specific example might be:
 
@@ -99,9 +97,9 @@ As noted in previous sections, Landlab is coded in an `object-oriented style <ht
 
 Note that most components require the grid object be passed to them as one of their arguments during instantiation, so the first thing you’ll want to instantiate will be the grid.
 
-Check the docstrings for each class (grid, component) you want to instantiate for a detailed description of what you need to supply as arguments. For a RasterModelGrid, this will be (number_of_node_rows, number_of_node_columns, node_spacing(optional)). For a VoronoiDelaunayGrid, it will be (array_of_node_x_coords, array_of_node_y_coords). For a generic component, it will typically be (ModelGrid, ‘path_to_parameter_file.txt’), though there may be some variation, and optional inputs may also be available.
+Check the docstrings for each class (grid, component) you want to instantiate for a detailed description of what you need to supply as arguments. For a RasterModelGrid, this will be ``(number_of_node_rows, number_of_node_columns, node_spacing(optional))``. For a VoronoiDelaunayGrid, it will be ``(array_of_node_x_coords, array_of_node_y_coords)``. For a generic component, it will typically be ``(ModelGrid, ‘path_to_parameter_file.txt’)``, though there may be some variation, and optional inputs may also be available.
 
-Give each object you instantiate a variable name. We like “mg” for ModelGrid objects, and some appropriate abbreviation for a component.
+Give each object you instantiate a variable name. We like ``mg`` for ModelGrid objects, and some appropriate abbreviation for a component.
 
 An example might be:
 
@@ -115,13 +113,13 @@ An example might be:
 3. Load/create data in fields
 +++++++++++++++++++++++++++++
 
-(:ref:`See this section <fields>` if you don’t know what a Landlab field is)
+([[See this section | Grid#fields ]] if you don’t know what a Landlab field is)
 
 Now we need some data to work with. Here we’ll assume that you’re going to be working with a DEM-style elevation map across the nodes of the grid, but similar considerations would apply for any other type of data.
 
-You will likely be in one of two situations regarding the initial data you want to put on the grid - either you will have some external data source that you want to load in and use as your initial conditions (e.g., a DEM of some basin, or some other real topography), or you want to set up some simple analytical initial condition like a flat surface with noise or an inclined surface.
+You will likely be in one of two situations regarding the initial data you want to put on the grid–either you will have some external data source that you want to load in and use as your initial conditions (e.g., a DEM of some basin, or some other real topography), or you want to set up some simple analytical initial condition like a flat surface with noise or an inclined surface.
 
-In both cases, we advocate a two step process: creating a numpy array of the data, then loading it into the grid as a field. We can illustrate for both of the above cases:
+In both cases, we advocate a two step process: creating a NumPy array of the data, then loading it into the grid as a field. We can illustrate for both of the above cases:
 
 .. code-block:: python
 
@@ -134,15 +132,15 @@ In both cases, we advocate a two step process: creating a numpy array of the dat
     # create the field:
     mg.add_field('node', 'topographic__elevation', z, units='m')
 
-Alternatively, we can use the specialized Landlab function :func:`~landlab.io.esri_ascii.read_esri_ascii`
-to import an ascii raster that can be output from ARC. Note this function both creates the grid for you and loads the data as a field if you provide ‘name’. If not, you’ll have to load the data output (*z*, below) manually::
+Alternatively, we can use the specialized Landlab function `landlab.io.esri_ascii.read_esri_ascii <http://landlab.readthedocs.org/en/latest/manual_index_alt_format.html#landlab.io.esri_ascii.read_esri_ascii>`_
+to import an ascii raster that can be output from ARC. Note this function both creates the grid for you and loads the data as a field if you provide ``name``. If not, you’ll have to load the data output (*z*, below) manually::
 
     >>> from landlab.io import read_esri_ascii
     >>> mg, z = read_esri_ascii('my_ARC_output.asc', name='topographic__elevation')
     >>> np.all(mg.at_node['topographic__elevation'] == z)
     True
 
-Note that if you don’t want to use any Landlab components, you can continue to work with data as “free floating” numpy arrays, and can ignore the fields (e.g., see the :ref:`simple tutorial <getting_started>` at the start of this guide).
+Note that if you don’t want to use any Landlab components, you can continue to work with data as “free floating” NumPy arrays, and can ignore the fields (e.g., see the `simple tutorial <http://landlab.readthedocs.org/en/latest/getting_started.html#getting-started>`_ at the start of this guide).
 
 
 4. Set the boundary conditions
@@ -162,7 +160,7 @@ If you’re working with, say, an ARC imported array with a null value on the cl
 
 (Note though that you’re still likely to have to reopen an outlet node manually! In which case you’ll also need to follow the instructions below.)
 
-If you’re working with individual nodes’ boundary statuses, you’ll need to set the BCs by hand. This means individually modifying the boundary condition status of each node or link that you want to be of the new type. Fortunately, Landlab uses some Python magic to make sure that when you update, for example, the status of a node, the statuses of attached links and cells change concomitantly. For example::
+If you’re working with individual node’s boundary statuses, you’ll need to set the boundary conditions by hand. This means individually modifying the boundary condition status of each node or link that you want to be of the new type. Fortunately, Landlab uses some Python magic to make sure that when you update, for example, the status of a node, the statuses of attached links and cells change concomitantly. For example::
 
     >>> # find the ID of the lowest elevation core node.
     >>> # we'll make this a fixed gradient outlet:
@@ -202,9 +200,9 @@ or:
 Both produce 1000 time units of run, with an explicit timestep of 10. Notice that the latter technique is particularly amenable to situations where your explicit timestep is varying (e.g., a storm sequence).
 
 Landlab also however has a built in storm generator component,
-:class:`~landlab.components.uniform_precip.generate_uniform_precip.PrecipitationDistribution`,
+`landlab.components.uniform_precip.generate_uniform_precip.PrecipitationDistribution <http://landlab.readthedocs.org/en/latest/landlab.components.uniform_precip.html#landlab.components.uniform_precip.generate_uniform_precip.PrecipitationDistribution>`_,
 which (as its module name suggests) actually acts as a true `Python generator <http://www.python-course.eu/generators.php>`_. The main method is
-:func:`~landlab.components.uniform_precip.generate_uniform_precip.PrecipitationDistribution.yield_storm_interstorm_duration_intensity`.
+`landlab.components.uniform_precip.generate_uniform_precip <http://landlab.readthedocs.org/en/latest/landlab.components.uniform_precip.html#landlab.components.uniform_precip.generate_uniform_precip.PrecipitationDistribution.yield_storm_interstorm_duration_intensity>`_.
 This means producing a storm series in Landlab is also very easy:
 
 .. code-block:: python
@@ -223,7 +221,7 @@ This means producing a storm series in Landlab is also very easy:
 Notice that the advantage of the generator is that it just stops when the desired number of events/time duration has expired! See the end of `this tutorial <http://nbviewer.ipython.org/github/landlab/drivers/blob/master/notebooks/component_tutorial.ipynb>`_ for an example of this generator in action.
 
 
-What exactly “...do the thing” consists of is up to you. You can either design your own operations to do in the loop for yourself, or you can implement processes from Landlab’s component library. See :ref:`here <landlab_components_page>` for more information on using the components.
+What exactly “…do the thing” consists of is up to you. You can either design your own operations to do in the loop for yourself, or you can implement processes from Landlab’s component library. See `here <http://landlab.readthedocs.org/en/latest/landlab_components.html#landlab-components-page>`_ for more information on using the components.
 
 
 6. Finalize and handle the data
@@ -234,7 +232,7 @@ Once the looping is complete, the model is effectively finished. However, you wi
 Save or export the data
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-If you’re using a raster grid, you can easily save your grid output to either ESRI ascii (i.e. ARCmap) or open source netCDF formats. netCDF in particular is a powerful format, and allows easy subsequent re-loading of a Landlab modelgrid and all its fields. Save your raster like this:
+If you’re using a raster grid, you can easily save your grid output to either ESRI ascii (i.e., ARCmap) or open source netCDF formats. netCDF in particular is a powerful format, and allows easy subsequent re-loading of a Landlab modelgrid and all its fields. Save your raster like this:
 
 .. code-block:: python
 
@@ -248,10 +246,10 @@ or:
     rmg.save('my_savename.nc')
     # save as netCDF3, saving all fields by default
 
-The former way will give two save files, my_savename_field1.asc and my_savename_field2.asc. The latter will just give ‘my_savename.nc’.
+The former way will give two save files, ``my_savename_field1.asc`` and ``my_savename_field2.asc``. The latter will just give ``my_savename.nc``.
 
 To reload a netCDF file, use the Landlab io function
-:func:`~landlab.io.netcdf.read_netcdf`::
+`landlab.io.netcdf.read_netcdf <http://landlab.readthedocs.org/en/latest/landlab.io.netcdf.html#landlab.io.netcdf.read_netcdf>`_ ::
 
     >>> from landlab.io.netcdf import read_netcdf
     >>> mg = read_netcdf('my_savename.nc')
@@ -268,7 +266,7 @@ If you’re using an irregular grid, the simple grid save function is not yet op
 
 Unfortunately, the power of pickle comes somewhat at the expense of both disk space and speed. Saves this way can be slow and, if the grid is big, memory expensive (e.g., ~1 Gb for millions of nodes).
 
-You can also use lower level, numpy save routines to preserve just your data (rather than the whole grid object). The numpy methods **save** and **savetxt** and **load** and **loadtxt** can be called on any numpy array, including those saved as fields. Save and load use the numpy specific .npy file format; savetxt and loadtxt use textfiles. Use them like this::
+You can also use lower level, NumPy save routines to preserve just your data (rather than the whole grid object). The NumPy methods ``save`` and ``savetxt`` and ``load`` and ``loadtxt`` can be called on any NumPy array, including those saved as fields. Save and load use the NumPy specific ``.npy`` file format; ``savetxt`` and ``loadtxt`` use ``textfiles``. Use them like this::
 
     >>> np.save('savename.npy', mg.at_node['my_field'])
     >>> mg.at_node['my_field'] = np.load('savename.npy')
@@ -279,7 +277,7 @@ You can also use lower level, numpy save routines to preserve just your data (ra
 Plot the data
 ^^^^^^^^^^^^^
 
-Landlab has a fairly comprehensive suite of built in plotting functions; read more about them :ref:`here <plotting>`.
+Landlab has a fairly comprehensive suite of built in plotting functions; read more about them [[ here | Grid#plotting]].
 
 You also of course have the option of using the `matplotlib plotting library <http://matplotlib.org>`_ of Python for things like cross-sections.
 
