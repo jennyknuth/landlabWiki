@@ -28,7 +28,7 @@ Python doesn’t use parentheses or brackets to delimit code blocks (functions, 
     
 Lines don’t need to end with the semicolon to suppress output; Python won’t print output unless you explicitly call print.
 
-Finally, but importantly, Python doesn't use the hat (``^``) as its raise-to-the-power symbol. Instead, it uses a double star (**). Simple, but typically very frustrating for a day or two during transition! There's also the NumPy method, ``np.square``, which if you're using arrays typically outperforms the ``**`` operator.
+Finally, but importantly, Python doesn't use the hat ``^`` as its raise-to-the-power symbol. Instead, it uses a double star ``**``. Simple, but typically very frustrating for a day or two during transition! There's also the NumPy method, ``np.square``, which if you're using arrays typically outperforms the ``**`` operator.
 
 We have a very short tutorial on Python and NumPy from the point of view of Landab (and the key differences with Matlab) `here <http://nbviewer.ipython.org/github/landlab/drivers/blob/master/notebooks/Python_intro.ipynb>`_.
 
@@ -71,7 +71,7 @@ Cython
 
 If you go poking around in the Landlab source code code, you will discover that not all of Landlab is written in pure Python. Some of it is written in Cython. Cython is a very closely related programming language to Python, and indeed, all code written in pure Python is automatically also Cython code. Cython is probably best thought of as a cross between C++ and Python, which aims to combine the flexibility of Python with the brute power and granular control over your code that C++ provides. e.g., if there are sections of code where looping through an array is unavoidable, Cython provides a way of significantly accelerating the speed of this code. Cython code largely looks like straightforward Python, but may have type declarations or other C++-like features within it.
 
-From the user’s perspective, the most important thing to note is that Cython is a compiled language. (This isn’t true of Python, which is an interpreted - i.e., compiled at run time - language.) We provide the pre-compiled executables you will need to run Landlab when you install, and this should be sufficient for the vast majority of users.
+From the user’s perspective, the most important thing to note is that Cython is a compiled language. (This isn’t true of Python, which is an interpreted—i.e., compiled at run time—language.) We provide the pre-compiled executables you will need to run Landlab when you install, and this should be sufficient for the vast majority of users.
 
 However, note that if as a developer you intend to modify any of the sections of code that we provide to you, you will probably need to recompile that code on your machine before the changes take effect. See the [[developer installation instructions | Install#dev]] for lots more information on this.
 
