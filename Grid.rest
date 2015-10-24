@@ -431,12 +431,4 @@ array by hand, using indexes to node IDs. When you’re done, be sure to call
 to ensure internal consistency between 
 the boundary conditions of the various grid elements.
 
-Note that while setting Landlab boundary conditions on the grid is straightforward, it 
-is up to the individual developer of each Landlab component to ensure it is compatible 
-with these boundary condition schemes! Almost all existing components work fine with 
-core, closed, and fixed_value conditions, but some may struggle with fixed_gradient, 
-and most will struggle with looped. If you’re working with the component library, take 
-a moment to check your components can understand your implemented boundary conditions! 
-See the :ref:`Component Developer’s Guide <dev_components>` for more information.
-
 
