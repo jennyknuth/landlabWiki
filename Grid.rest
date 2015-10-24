@@ -318,3 +318,70 @@ track of the geometry and topology of the grid. patches can be useful for proces
 like calculating the mean gradient at a node, incorporating influence from its
 neighbors.
 
+Managing Grid Boundaries
+========================
+
+An important component of any numerical model is the method for handling
+boundary conditions. In general, it's up to the application developer to manage
+boundary conditions for each variable. However, **ModelGrid** makes this task a bit
+easier by tagging nodes that are treated as boundaries (*boundary nodes*) 
+and those that are treated as regular nodes belonging to the interior 
+computational domain (*core nodes*). It also allows you to de-activate ("close")
+portions of the grid perimeter, so that they effectively act as walls.
+
+Let's look first at how ModelGrid treats its own geometrical boundaries. The
+outermost elements of a grid are nodes and links (as opposed to corners and
+faces). For example, :ref:`Figure 2 <raster4x5>` shows a sketch of a regular
+four-row by five-column grid created by RasterModelGrid. The edges of the grid
+are composed of nodes and links. Only the inner six nodes have cells around
+them; the remaining 14 nodes form the perimeter of the grid.
+
+.. _raster4x5:
+
+.. figure:: images/example_raster_grid.png
+    :figwidth: 80%
+    :align: center
+
+    Figure 2: Illustration of a simple four-row by five-column raster grid created with
+    :class:`~landlab.grid.raster.RasterModelGrid`. By default, all perimeter
+    nodes are tagged as open (fixed value) boundaries, and all interior cells
+    are tagged as core. An active link is one that connects either
+    two core nodes, or one core node and one open boundary node.
+
+All nodes are tagged as either *boundary* or *core*. Those on the
+perimeter of the grid are automatically tagged as boundary nodes. Nodes on the
+inside are *core* by default, but it is possible to tag some of them as
+*boundary* instead (this would be useful, for example, if you wanted to
+represent an irregular region, such as a watershed, inside a regular grid). In the example 
+shown in :ref:`Figure 2 <raster4x5>`, all the interior nodes are *core*, and all
+perimeter nodes are *open boundary*. 
+
+Boundary nodes are flagged as either *open* or *closed*, and links are tagged as 
+either *active* or *inactive* (:ref:`Figure 3 <raster4x5openclosed>`).
+
+.. _raster4x5openclosed:
+
+.. figure:: images/example_raster_grid_with_closed_boundaries.png
+    :figwidth: 80 %
+    :align: center
+
+    Figure 3: Illustration of a simple four-row by five-column raster grid with a
+    combination of open and closed boundaries.
+
+A closed boundary is one at which no flux is permitted enter or leave, ever.
+By definition, all links coming into or out of a closed boundary node must be inactive. 
+There is effectively no value assigned to a closed boundary; it will probably have a 
+BAD_INDEX_VALUE or null value of some kind.
+An open boundary is one at which flux can enter or leave, but whose value is controlled 
+by some boundary condition rule, updated at the end of each timestep.
+
+An *active link*
+is one that joins either two core nodes, or one *core* and one
+*open boundary* node (:ref:`Figure 3 <raster4x5openclosed>`). You can use this
+distinction in models to implement closed boundaries by performing flow
+calculations only on active links, as seen in `this tutorial 
+<http://nbviewer.ipython.org/github/landlab/drivers/tree/master/notebooks/LandlabFaultScarpDemo.ipynb>`_.
+
+
+.. _bc_details:
+
