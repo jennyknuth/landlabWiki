@@ -216,3 +216,16 @@ compatibility <http://csdms.colorado.edu/wiki/BMI_Description>`_.
 
 The following gives an overview of the commands you can use to interact with the grid fields.
 
+Field initialization
+^^^^^^^^^^^^^^^^^^^^
+
+* grid.add_empty(group, name, units=’-’)
+* grid.add_ones(group, name, units=’-’)
+* grid.add_zeros(group, name, units=’-’)
+
+“group” is one of ‘node’, ‘link’, ‘cell’, ‘face’, ‘corner’, ‘junction’, ‘patch’
+
+“name” is a string giving the field name
+
+“units” (optional) is the units associated with the field values.
+
