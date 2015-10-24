@@ -244,3 +244,24 @@ Arguments as above, plus:
 “noclobber” (optional) if True, raises an exception if a field called name already exists.
 
 
+Field access
+^^^^^^^^^^^^
+
+* grid.at_node or grid[‘node’]
+* grid.at_cell or grid[‘cell’]
+* grid.at_link or grid[‘link’]
+* grid.at_face or grid[‘face’]
+* grid.at_corner or grid[‘corner’]
+* grid.at_junction or grid[‘junction’]
+* grid.at_patch or grid[‘patch’]
+
+Each of these is then followed by the field name as a string in square brackets, e.g.,
+
+>>> grid.at_node[‘my_field_name’] #or 
+>>> grid[‘node’][‘my_field_name’]
+
+You can also use these commands to create fields from existing arrays, 
+as long as you don’t want to take advantage of the added control “add_field()” gives you.
+
+
+
