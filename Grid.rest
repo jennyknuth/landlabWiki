@@ -229,3 +229,18 @@ Field initialization
 
 “units” (optional) is the units associated with the field values.
 
+
+Field creation from existing data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* grid.add_field(group, name, value_array, units=’-’, copy=False, noclobber=False)
+
+Arguments as above, plus:
+
+“value_array” is a correctly sized numpy array of data from which you want to create the field.
+
+“copy” (optional) if True adds a *copy* of value_array to the field; if False, creates a reference to value_array.
+
+“noclobber” (optional) if True, raises an exception if a field called name already exists.
+
+
