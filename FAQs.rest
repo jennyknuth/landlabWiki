@@ -77,4 +77,4 @@ The way to do this is:
 Why are there no other FAQs besides these few?
 ----------------------------------------------
 
-Please feel free to add your own questions to this wiki.
+Because we need your questions. Please feel free to add your own questions to this wiki.
