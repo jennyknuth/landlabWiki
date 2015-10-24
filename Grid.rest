@@ -109,3 +109,110 @@ Now, create a regular (raster) grid with 10 rows and 40 columns, with a node spa
 
 
 .. _fields:
+
+Adding Data to a Landlab Grid Element using Fields
+--------------------------------------------------
+
+Landlab has a data structure called *fields* that will store data associated with different types
+of grid elements.  Fields are convenient because 1) fields create data arrays of the proper length for 
+the associated data type and 2) fields attach these data to the grid, so that any piece of code that has 
+access to the grid also has access to the data stored in fields. Suppose you would like like to
+track the elevation at each node.  The following code creates a data field (array) called *elevation* and 
+the number of elements in the array is the number of nodes:
+
+>>> z = mg.add_zeros('node', 'elevation')
+
+Here *z* is an array of zeros.  You can that *z* has the same length as the number of nodes:
+
+>>> z.size  #or len(z)
+400
+
+Note that *z* is a reference to the data stored in the model field.  This means that if you change z, you
+also change the data in the ModelGrid's elevation field.  You can also change values directly in the ModelGrid's 
+elevation field:
+
+>>> mg.at_node['elevation'][5] = 1000.
+
+or the alternative notation:
+
+>>> mg['node']['elevation'][5]
+1000.
+
+Now the sixth element in the model's elevation field array, or in *z*, is equal to 1000.  (Remember that the first 
+element of a Python array has an index of 0 (zero).
+
+You can see all of the field data at the nodes on *mg* with the following:
+
+>>> mg.at_node.keys()
+['elevation']
+
+You may recognize this as a dictionary-type structure, where 
+the keys are the names (as strings) of the data arrays. 
+
+There are currently no data assigned to the links, as apparent by the following:
+
+>>> mg.at_link.keys()
+[]
+
+It is also possible, and indeed, often quite useful, to initialize a field from an
+existing numpy array of data. You can do this with the 
+:func:`~landlab.field.grouped.ModelDataFields.add_field` method.
+This method also allows slightly more granular control over how the method gets created,
+e.g., you can force a copy of the data to be made, or you can assign units to the field.
+
+>>> import numpy as np
+>>> elevs_in = np.random.rand(mg.number_of_nodes)
+>>> mg.add_field('node', 'elevation', elevs_in, units='m', copy=True, noclobber=True)
+
+
+.. Dan has taken all reference to active_links, core_cells, etc out of this section, as it's not
+.. best practice.
+Fields can store data at nodes, cells, links, faces, patches, junctions, and corners (though the 
+latter two or three are very rarely, if ever, used). Which of these you select is 
+described in Landlab jargon as that field's *centering* or *group*, and you will 
+sometimes see this  as an input to various grid methods.
+
+Access only the core nodes, active links, or some other subset of node values using the
+properties available through the modelgrid:
+
+>>> core_node_elevs = mg.at_node['elevation'][mg.core_nodes]
+
+Note that when initializing a field, the singular of the grid  
+element type is provided:
+
+>>> veg = mg.add_ones('cell', 'percent_vegetation')
+>>> mg.at_cell.keys()
+['percent_vegetation']
+
+Note that here *veg* is an array of ones, that has the same length as the number of cells.  Note that there are
+no cells around the edge of a grid, so there are less cells than nodes:
+
+>>> mg.at_cell['percent_vegetation'].size
+304
+
+As you can see, fields are convenient because you don't have to keep track of how many nodes, links, cells, etc. 
+there are on the grid.  Further it is easy for any part of the code to query what data are already associated with the grid
+and operate on these data.
+
+You are free to call your fields whatever you want. However, many Landlab components 
+require that you use :ref:`Landlab’s standard names <standard_names>`. 
+The standard names required can be 
+accessed individually for each component with the properties 
+*component_instance._input_var_names* and *component_instance._output_var_names* 
+(returned as dictionaries), and should also be listed in the docstring for each component.
+
+We also maintain this list of all the :ref:`Landlab standard names <standard_name_list>`.
+
+.. We don't have a standard list yet. We should.
+
+.. internal link goes on "direct compatibility"
+Our fields also offer direct compatibility with `CSDMS’s standard naming system for 
+variables <http://csdms.colorado.edu/wiki/CSDMS_Standard_Names>`_. 
+However, note that, for ease of use and readability, Landlab standard 
+names are typically much shorter than CSDMS standard names. We anticipate that future 
+Landlab versions will be able to automatically map from Landlab standard names to CSDMS 
+standard names as part of Landlab’s built-in `Basic Model Interface for CSDMS 
+compatibility <http://csdms.colorado.edu/wiki/BMI_Description>`_.
+
+The following gives an overview of the commands you can use to interact with the grid fields.
+
