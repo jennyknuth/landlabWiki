@@ -1,4 +1,4 @@
-Click on any of the examples below for more information.
+Click on any of the examples below for more information about the model and how to create it.
 
 <a href="http://landlab.readthedocs.org/en/latest/_images/half_fork_dem.png"><img src="http://landlab.readthedocs.org/en/latest/_images/half_fork_dem.png" alt="" height="125"></a>
 <a href="http://landlab.readthedocs.org/en/latest/_images/half_fork_dem.png"><img src="http://the-landlab.readthedocs.org/en/latest/_images/basic_diffusion_example.png" alt="" height="125"></a>
