@@ -1,8 +1,3 @@
-<h3>
-    Installing Landlab
-    using Anaconda—Recommended Method
-  </h3>
-
   <p>
     This should work for <a href="https://www.continuum.io/downloads">Anaconda</a> users with Windows 7+, Mac OS 10.6+, or Ubuntu
     Linux (only the latest version has been tested).
