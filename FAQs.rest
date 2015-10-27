@@ -62,12 +62,10 @@ The way to do this is:
 .. code-block:: python
 
     from landlab import RasterModelGrid, VoronoiDelaunayGrid
-    import inspect
     # ...
-    grid_inheritance = inspect.getmro(grid.__class__)
-    if RasterModelGrid in grid_inheritance:
+    if isinstance(mg, RasterModelGrid):
         print('Doing it one way')
-    elif VoronoiDelaunayGrid in grid_inheritance:
+    elif isinstance(mg, VoronoiDelaunayGrid):
         print('Doing it the other way')
     else:
         raise TypeError('Landlab did not recognise your grid type!')
