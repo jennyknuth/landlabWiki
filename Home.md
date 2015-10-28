@@ -11,6 +11,6 @@
 [[Tutorials| Tutorials ]] |
 [[FAQs |FAQs]] 
 
-Landlab is a Python-based modeling environment that allows scientists and students to build numeric landscape models. Designed for disciplines that quantify earth surface dynamics such as geomorphology, hydrology, glaciology, and stratigraphy, it can also be used in related fields.
+Landlab is a Python-based modeling environment that allows scientists and students to build numerical landscape models. Designed for disciplines that quantify earth surface dynamics such as geomorphology, hydrology, glaciology, and stratigraphy, it can also be used in related fields.
     
 Landlab provides components to compute flows (such as water, sediment, glacial ice, volcanic material, or landslide debris) across a gridded terrain. With its robust, reusable components, Landlab allows scientists to quickly build landscape model experiments and compute mass balance across scales.
