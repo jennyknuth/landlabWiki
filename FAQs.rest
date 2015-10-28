@@ -71,6 +71,11 @@ The way to do this is:
         raise TypeError('Landlab did not recognise your grid type!')
 
 
+How do I modify boundary conditions for part of the grid where I know the coordinates?
+--------------------------------------------------------------------------------------
+
+See "here":https://github.com/landlab/drivers/blob/master/notebooks/boundary_conds/set_BCs_from_xy.ipynb.
+
 
 Why are there no other FAQs besides these few?
 ----------------------------------------------
