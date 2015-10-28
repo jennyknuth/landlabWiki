@@ -3,22 +3,22 @@ Why is my node data a 1d array? I'm using a raster...
 
 All Landlab data structures have to be compatible with both regular and irregular grids. A 2d structure for node data might make sense for a raster, but it wouldn't work for an irregular grid - and moreover, there is also no sensible way to represent link data as a 2d raster either, even for a raster. Thus, instead, Landlab stores all data in an order set by *node ID number*. For a raster, IDs begin at zero in the bottom left corner of the grid, then run along each row in turn. For links, the IDs also start in the bottom left and run across then up, but in this case all vertical links are listed, then all horizontal links. Here's a sketch summary of this scheme for a 4x5 raster:
 
-<pre><code>
-NODES:                                    LINKS:
-15------16------17------18------19        *--27-->*--28-->*--29-->*--30-->*
-|       |       |       |       |         ^       ^       ^       ^       ^
-|       |       |       |       |        10      11      12      13      14
-|       |       |       |       |         |       |       |       |       |
-10------11------12------13------14        *--23-->*--24-->*--25-->*--26-->*
-|       |       |       |       |         ^       ^       ^       ^       ^
-|       |       |       |       |         5       6       7       8       9
-|       |       |       |       |         |       |       |       |       |
-5-------6-------7-------8-------9         *--19-->*--20-->*--21-->*--22-->*
-|       |       |       |       |         ^       ^       ^       ^       ^
-|       |       |       |       |         0       1       2       3       4
-|       |       |       |       |         |       |       |       |       |
-0-------1-------2-------3-------4         *--15-->*--16-->*--17-->*--18-->*
-</code></pre>
+::
+
+    NODES:                                    LINKS:
+    15------16------17------18------19        *--27-->*--28-->*--29-->*--30-->*
+    |       |       |       |       |         ^       ^       ^       ^       ^
+    |       |       |       |       |        10      11      12      13      14
+    |       |       |       |       |         |       |       |       |       |
+    10------11------12------13------14        *--23-->*--24-->*--25-->*--26-->*
+    |       |       |       |       |         ^       ^       ^       ^       ^
+    |       |       |       |       |         5       6       7       8       9
+    |       |       |       |       |         |       |       |       |       |
+    5-------6-------7-------8-------9         *--19-->*--20-->*--21-->*--22-->*
+    |       |       |       |       |         ^       ^       ^       ^       ^
+    |       |       |       |       |         0       1       2       3       4
+    |       |       |       |       |         |       |       |       |       |
+    0-------1-------2-------3-------4         *--15-->*--16-->*--17-->*--18-->*
 
 
 How do I set the boundary codes for the edges of a grid?
