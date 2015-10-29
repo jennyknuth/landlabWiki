@@ -32,4 +32,5 @@ The Landlab Team:
   - Sai Nudurupati (UW)
   - Jordan Adams (Tulane)
   - Eric Hutton (CU)
+  - Jenny Knuth (CU)
 
